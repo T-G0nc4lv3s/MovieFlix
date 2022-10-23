@@ -11,8 +11,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.movieflix.dto.RoleDTO;
 import com.devsuperior.movieflix.dto.UserDTO;
+import com.devsuperior.movieflix.dto.UserFullDTO;
+import com.devsuperior.movieflix.entities.Role;
 import com.devsuperior.movieflix.entities.User;
+import com.devsuperior.movieflix.repositories.RoleRepository;
 import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
@@ -25,6 +29,9 @@ public class UserService implements UserDetailsService{
 	private UserRepository repository;
 	
 	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
 	private AuthService authService;
 	
 	@Transactional
@@ -33,6 +40,16 @@ public class UserService implements UserDetailsService{
 		return user;
 	}
 	
+	
+	@Transactional
+	public UserDTO insert(UserFullDTO dto) {
+		User user = new User();
+		dtoToEntity(dto, user);
+		user = repository.save(user);
+		return new UserDTO(user);	
+	}
+
+
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
@@ -40,6 +57,22 @@ public class UserService implements UserDetailsService{
 		return new UserDTO(entity);
 	}
 
+	
+	
+	private void dtoToEntity(UserFullDTO dto, User user) {
+
+		user.setName(dto.getName());
+		user.setEmail(dto.getEmail());
+		user.setPassword(dto.getPassword());
+		user.getRoles().clear();
+
+		for(RoleDTO roleDTO : dto.getRoles()) {
+			Role role = roleRepository.getOne(roleDTO.getId());
+			user.getRoles().add(role);
+			}
+	}
+	
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = repository.findByEmail(username);

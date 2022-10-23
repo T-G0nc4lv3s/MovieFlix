@@ -11,19 +11,32 @@ import com.devsuperior.movieflix.entities.User;
 public class UserFullDTO extends UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	
+	private String password;
+	
 	@NotNull(message = "Campo requerido")
 	private List<RoleDTO> roles = new ArrayList<>();
 	
 	public UserFullDTO() {
 	}
 
-	public UserFullDTO(Long id, String name, String email) {
+	public UserFullDTO(Long id, String name, String email, String password) {
 		super(id, name, email);
+		this.password = password;
 	}
 
 	public UserFullDTO(User entity) {
 		super(entity);
+		this.password = entity.getPassword();
 		entity.getRoles().forEach(x -> this.roles.add(new RoleDTO(x)));
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<RoleDTO> getRoles() {
