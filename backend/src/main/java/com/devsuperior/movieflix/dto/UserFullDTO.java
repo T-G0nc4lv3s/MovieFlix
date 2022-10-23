@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.devsuperior.movieflix.entities.User;
 
 public class UserFullDTO extends UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Size(min = 6, message = "O campo deve ter no mínimo 6 caracteres")
+	@NotBlank(message = "Campo requerido")
 	private String password;
 	
 	@NotNull(message = "Campo requerido")
