@@ -22,6 +22,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] MEMBER = {"/reviews/**"};
 	
+	private static final String[] ADMIN = {"/users/**"};
+	
 	@Autowired
 	private Environment env;
 	
@@ -44,6 +46,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(PUBLIC).permitAll()
 		.antMatchers(HttpMethod.GET, VISITOR_OR_MEMBER).hasAnyRole("VISITOR", "MEMBER")
 		.antMatchers(HttpMethod.POST, MEMBER).hasRole("MEMBER")
+		.antMatchers(ADMIN).hasAnyRole(ADMIN)
 		.anyRequest().authenticated();
 	}
 	

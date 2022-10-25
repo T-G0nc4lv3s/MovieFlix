@@ -9,9 +9,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.devsuperior.movieflix.entities.User;
+import com.devsuperior.movieflix.services.validation.UserUpdateValid;
 
-
-public class UserFullDTO extends UserDTO implements Serializable{
+@UserUpdateValid
+public class UserUpdateDTO extends UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Size(min = 6, message = "O campo deve ter no mínimo 6 caracteres")
@@ -21,15 +22,15 @@ public class UserFullDTO extends UserDTO implements Serializable{
 	@NotNull(message = "Campo requerido")
 	private List<RoleDTO> roles = new ArrayList<>();
 	
-	public UserFullDTO() {
+	public UserUpdateDTO() {
 	}
 
-	public UserFullDTO(Long id, String name, String email, String password) {
+	public UserUpdateDTO(Long id, String name, String email, String password) {
 		super(id, name, email);
 		this.password = password;
 	}
 
-	public UserFullDTO(User entity) {
+	public UserUpdateDTO(User entity) {
 		super(entity);
 		this.password = entity.getPassword();
 		entity.getRoles().forEach(x -> this.roles.add(new RoleDTO(x)));
