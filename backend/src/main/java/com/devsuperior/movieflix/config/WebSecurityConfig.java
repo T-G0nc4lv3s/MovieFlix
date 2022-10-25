@@ -17,10 +17,10 @@ public class WebSecurityConfig {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -28,14 +28,15 @@ public class WebSecurityConfig {
 		authProvider.setPasswordEncoder(passwordEncoder);
 		return authProvider;
 	}
-	
+
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-		return authConfig.getAuthenticationManager();	
+		return authConfig.getAuthenticationManager();
 	}
-	
+
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return web -> web.ignoring().antMatchers("/actuator/**");
+		return web -> web.ignoring().antMatchers("/actuator/**").antMatchers("/v2/api-docs", "/configuration/ui",
+				"/swagger-resources/**", "/configuration/**", "/swagger-ui.html", "/webjars/**");
 	}
 }
