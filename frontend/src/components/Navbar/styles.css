@@ -32,3 +32,16 @@ a:hover {
   text-decoration: none;
   color: unset;
 }
+
+
+@media( min-width: 768px){
+  .main-nav {
+    padding: 20px 20px 20px 30px;
+  }
+}
+
+@media( min-width: 992px){
+  .main-nav {
+    padding: 20px 30px 20px 40px;
+  }
+}
