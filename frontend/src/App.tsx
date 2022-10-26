@@ -1,9 +1,13 @@
 import './assets/styles/custom.scss';
+import Navbar from './components/Navbar/index';
 import './App.css';
 
 function App() {
   return (
- <h1 className="bg-primary">Hello World !</h1>
+    <>
+      <Navbar />
+      <h1>Hello World!</h1>
+    </>
   );
 }
 
