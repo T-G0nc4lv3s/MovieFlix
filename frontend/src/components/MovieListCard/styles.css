@@ -43,3 +43,21 @@
   letter-spacing: -0.015em;
   color: #9e9e9e;
 }
+
+@media(min-width: 576px){
+  .list-card-container {
+    padding: 23px 13px;
+  }
+}
+
+@media(min-width: 768px){
+  .list-card-container {
+    padding: 26px 16px;
+  }
+}
+
+@media(min-width: 992px){
+  .list-card-container {
+    padding: 30px 20px;
+  }
+}
