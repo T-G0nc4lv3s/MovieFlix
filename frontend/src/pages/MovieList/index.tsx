@@ -1,4 +1,5 @@
 import './styles.css';
+import { Link } from 'react-router-dom';
 
 const MovieList = () => {
 
@@ -6,10 +7,10 @@ const MovieList = () => {
         <div className="movie-list-container">
             <h1>Tela listagem de filmes</h1>
             <span>
-                <a href="#link">Acessar /movies/1</a>
+                <Link to="/movies/:movieId">Acessar /movies/1</Link>
             </span>
             <span>
-                <a href="#link">Acessar /movies/2</a>
+                <Link to="/movies/:movieId">Acessar /movies/2</Link>
             </span>
         </div>
         
