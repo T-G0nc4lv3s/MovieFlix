@@ -1,5 +1,6 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
+import { requestBackendLogin } from 'utils/requests';
 
 
 type FormData = {
@@ -12,8 +13,13 @@ const LoginCard = () => {
   const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
-    console.log(formData);
-    
+    requestBackendLogin(formData)
+    .then(response => {
+      console.log('Sucesso ', response); 
+    })
+    .catch(error => {
+      console.log('Erro ' + error);
+    });
   }
 
   return (
@@ -30,7 +36,7 @@ const LoginCard = () => {
           />
           <input
             {...register('password')}
-            type="text"
+            type="password"
             name="password"
             id="ctrl-password"
             placeholder="Senha"
