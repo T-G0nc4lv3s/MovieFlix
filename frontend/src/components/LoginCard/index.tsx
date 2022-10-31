@@ -51,6 +51,7 @@ const LoginCard = () => {
             name="username"
             id="ctrl-email"
             placeholder="Email"
+            className={`form-control ${errors.username ? 'is-invalid' : ''}`}
           />
           <div className="invalid-feedback d-block">
             {errors.username?.message}
@@ -63,6 +64,7 @@ const LoginCard = () => {
             name="password"
             id="ctrl-password"
             placeholder="Senha"
+            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
           />
           <div className="invalid-feedback d-block">
             {errors.password?.message}
