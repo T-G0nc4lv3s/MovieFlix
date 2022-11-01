@@ -1,6 +1,7 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { requestBackendLogin, saveAuthData, getAuthData } from 'utils/requests';
 
 type FormData = {
@@ -9,6 +10,9 @@ type FormData = {
 };
 
 const LoginCard = () => {
+
+  const history = useHistory();
+
   const [hasError, setHasError] = useState(false);
 
   const {
@@ -25,6 +29,7 @@ const LoginCard = () => {
         const token = getAuthData().access_token;
         console.log("Token gerado " + token);
         console.log('Sucesso ', response);
+        history.replace('/movies');
       })
       .catch((error) => {
         setHasError(true);
