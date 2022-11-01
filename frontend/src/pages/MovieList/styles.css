@@ -20,47 +20,47 @@
   color: #ffffff;
 }
 
-.movie-list-container span {
+.movie-link {
+  display: flex;
   font-weight: 400;
   font-size: 18px;
   line-height: 25px;
   letter-spacing: -0.015em;
   margin-top: 10px;
   color: #ffffff;
-
 }
 
-@media(min-width: 576px){
-    .movie-list-container {
-        padding: 20px 30px;
-    }
-    .movie-list-container h1 {
-        font-size: 32px;
-    }
-    .movie-list-container span {
-        font-size: 20px;
-    }
+@media (min-width: 576px) {
+  .movie-list-container {
+    padding: 20px 30px;
+  }
+  .movie-list-container h1 {
+    font-size: 32px;
+  }
+  .movie-link {
+    font-size: 20px;
+  }
 }
 
-@media(min-width: 768px){
-    .movie-list-container h1 {
-        font-size: 40px;
-    }
-    .movie-list-container span {
-        font-size: 22px;
-    }
+@media (min-width: 768px) {
+  .movie-list-container h1 {
+    font-size: 40px;
+  }
+  .movie-link {
+    font-size: 22px;
+  }
 }
 
-@media(min-width: 992px){
-    .movie-list-container {
-        padding: 40px 40px;
-    }
-    .movie-list-container h1 {
-        margin-bottom: 29px;
-        font-size: 48px;
-    }
-    .movie-list-container span {
-        margin-top: 30px;
-        font-size: 24px;
-    }
+@media (min-width: 992px) {
+  .movie-list-container {
+    padding: 40px 40px;
+  }
+  .movie-list-container h1 {
+    margin-bottom: 29px;
+    font-size: 48px;
+  }
+  .movie-link {
+    margin-top: 30px;
+    font-size: 24px;
+  }
 }
