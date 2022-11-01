@@ -1,7 +1,7 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { requestBackendLogin } from 'utils/requests';
+import { requestBackendLogin, saveAuthData, getAuthData } from 'utils/requests';
 
 type FormData = {
   username: string;
@@ -21,6 +21,9 @@ const LoginCard = () => {
     requestBackendLogin(formData)
       .then((response) => {
         setHasError(false);
+        saveAuthData(response.data);
+        const token = getAuthData().access_token;
+        console.log("Token gerado " + token);
         console.log('Sucesso ', response);
       })
       .catch((error) => {

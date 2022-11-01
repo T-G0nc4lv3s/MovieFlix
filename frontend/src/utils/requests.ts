@@ -11,6 +11,17 @@ type LoginData = {
    password : String,
 }
 
+type LoginResponse = {
+    access_token: String;
+    token_type: String;
+    expires_in: number;
+    scope: String;
+    userId: number;
+    username: String;
+}
+
+const tokenKey = 'authData';
+
 export const requestBackendLogin = (loginData : LoginData) => {
 
     const headers = {
@@ -25,4 +36,13 @@ export const requestBackendLogin = (loginData : LoginData) => {
     });
 
     return axios({method: 'POST', baseURL: BASE_URL, url: '/oauth/token', data, headers});
+}
+
+export const saveAuthData = (obj: LoginResponse) => {
+    localStorage.setItem(tokenKey, JSON.stringify(obj));
+}
+
+export const getAuthData = () => {
+    const str = localStorage.getItem(tokenKey) ?? "{}";
+    return JSON.parse(str) as LoginResponse;
 }
