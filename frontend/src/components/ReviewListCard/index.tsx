@@ -1,7 +1,7 @@
 import './styles.css';
 import Star from 'assets/images/star.svg';
 
-const MovieListCard = () => {
+const ReviewListCard = () => {
   return (
     <div className="list-card-container container-fluid">
       <div className="username-container">
@@ -29,4 +29,4 @@ const MovieListCard = () => {
   );
 };
 
-export default MovieListCard;
+export default ReviewListCard;

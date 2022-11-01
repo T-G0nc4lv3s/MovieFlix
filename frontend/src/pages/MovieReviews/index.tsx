@@ -1,6 +1,6 @@
 import './styles.css';
 import ReviewSubmit from 'components/ReviewSubmit';
-import MovieListCard from 'components/MovieListCard';
+import ReviewListCard from 'components/ReviewListCard';
 
 const MovieReviews = () => {
   return (
@@ -12,7 +12,7 @@ const MovieReviews = () => {
         <ReviewSubmit />        
       </div>
       <div className="review-list-container">
-        <MovieListCard />
+        <ReviewListCard />
       </div>
     </div>
   );
