@@ -73,6 +73,23 @@ export const requestBackend = (config: AxiosRequestConfig) => {
   return axios({ ...config, baseURL: BASE_URL, headers });
 };
 
+export const getTokenData = () : TokenData | undefined => {
+
+  const loginResponse = getAuthData();
+  try {
+    return jwtDecode(loginResponse.access_token) as TokenData;
+  } 
+  catch (error) {
+    return undefined;
+  }
+};
+
+export const isAuthenticated = () : boolean => {
+  const tokenData = getTokenData();
+
+  return (tokenData && tokenData.exp * 1000 > Date.now()) ? true : false;
+}
+
 // Add a request interceptor
 axios.interceptors.request.use(
   function (config) {
@@ -96,13 +113,4 @@ axios.interceptors.response.use(
   }
 );
 
-export const getTokenData = () : TokenData | undefined => {
 
-  const loginResponse = getAuthData();
-  try {
-    return jwtDecode(loginResponse.access_token) as TokenData;
-  } 
-  catch (error) {
-    return undefined;
-  }
-}

@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { Movie } from 'types/movie';
 import { requestBackend } from 'utils/requests';
 import { SpringPage } from 'types/vendor/spring';
+import { isAuthenticated} from 'utils/requests';
 
 const MovieList = () => {
-
 
   const [page, setPage] = useState<SpringPage<Movie>>();
 
@@ -30,6 +30,7 @@ const MovieList = () => {
 
   return (
     <div className="movie-list-container">
+      <h1>{isAuthenticated() ? 'autenticado' : 'não autenticado'}</h1>
       <h1>Tela listagem de filmes</h1>
       <div>
         {page?.content.map(movie => {
