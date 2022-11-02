@@ -1,10 +1,9 @@
 import './styles.css';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { AxiosRequestConfig } from 'axios';
 import { Link } from 'react-router-dom';
 import { Movie } from 'types/movie';
-import { BASE_URL } from 'utils/requests';
+import { requestBackend } from 'utils/requests';
 import { SpringPage } from 'types/vendor/spring';
 
 const MovieList = () => {
@@ -16,12 +15,13 @@ const MovieList = () => {
 
     const params : AxiosRequestConfig = {
         method: 'GET',
-        url: `${BASE_URL}/movies`,
+        url: '/movies',
+        withCredentials: true,
         params: {
             genreId: 0,
         }
     }
-    axios(params)
+    requestBackend(params)
     .then(response => {
         setPage(response.data);
         console.log(page);  
