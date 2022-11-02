@@ -11,7 +11,7 @@ const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'bds06123';
 
 type Role = 'ROLE_MEMBER' | 'ROLE_VISITOR' | 'ROLE_ADMIN';
 
-type TokenData = {
+export type TokenData = {
   exp: number;
   user_name: String;
   authorities: Role[];
@@ -61,6 +61,10 @@ export const getAuthData = () => {
   const str = localStorage.getItem(tokenKey) ?? '{}';
   return JSON.parse(str) as LoginResponse;
 };
+
+export const removeAuthData = () => {
+  localStorage.removeItem(tokenKey);
+}
 
 export const requestBackend = (config: AxiosRequestConfig) => {
   const headers = config.withCredentials
