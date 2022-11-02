@@ -1,8 +1,10 @@
 import './styles.css';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { requestBackendLogin, saveAuthData, getAuthData } from 'utils/requests';
+import { requestBackendLogin, saveAuthData } from 'utils/requests';
+import { AuthContext } from '../../AuthContext';
+import { getTokenData } from 'utils/requests';
 
 type FormData = {
   username: string;
@@ -10,6 +12,7 @@ type FormData = {
 };
 
 const LoginCard = () => {
+  const { setAuthContextData } = useContext(AuthContext);
 
   const history = useHistory();
 
@@ -26,9 +29,10 @@ const LoginCard = () => {
       .then((response) => {
         setHasError(false);
         saveAuthData(response.data);
-        const token = getAuthData().access_token;
-        console.log("Token gerado " + token);
-        console.log('Sucesso ', response);
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData(),
+        });
         history.replace('/movies');
       })
       .catch((error) => {

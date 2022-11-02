@@ -1,49 +1,45 @@
 import './styles.css';
 import { Link } from 'react-router-dom';
-import { TokenData } from 'utils/requests';
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { isAuthenticated, getTokenData, removeAuthData } from 'utils/requests';
+import { AuthContext } from '../../AuthContext';
 import history from 'utils/history';
 
-type AuthData = {
-  authenticated: boolean;
-  tokenData?: TokenData;
-};
-
 const Navbar = () => {
-  const [authData, setAuthData] = useState<AuthData>({ authenticated: false });
+  const { authContextData, setAuthContextData } = useContext(AuthContext);
 
   useEffect(() => {
     if (isAuthenticated()) {
-      setAuthData({
+      setAuthContextData({
         authenticated: true,
         tokenData: getTokenData(),
       });
     } else {
-      setAuthData({
+      setAuthContextData({
         authenticated: false,
       });
     }
-  }, []);
+  }, [setAuthContextData]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-
     event.preventDefault();
     removeAuthData();
-    setAuthData({
+    setAuthContextData({
       authenticated: false,
     });
     history.replace('/');
-  }
+  };
 
   return (
     <nav className="navbar bg-primary main-nav">
       <div className="logo-container">
         <Link to="/movies">MovieFlix</Link>
       </div>
-      {authData.authenticated ? (
+      {authContextData.authenticated ? (
         <div className="btn-container">
-          <button className="btn btn-primary btn-exit" onClick={handleClick}>SAIR</button>
+          <button className="btn btn-primary btn-exit" onClick={handleClick}>
+            SAIR
+          </button>
         </div>
       ) : (
         <></>
