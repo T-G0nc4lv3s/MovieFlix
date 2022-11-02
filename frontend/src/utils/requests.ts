@@ -1,6 +1,7 @@
 import qs from 'qs';
 import axios, { AxiosRequestConfig } from 'axios';
 import history from './history';
+import jwtDecode from 'jwt-decode';
 
 export const BASE_URL =
   process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
@@ -8,18 +9,26 @@ export const BASE_URL =
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'bds06';
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'bds06123';
 
+type Role = 'ROLE_MEMBER' | 'ROLE_VISITOR' | 'ROLE_ADMIN';
+
+type TokenData = {
+  exp: number;
+  user_name: String;
+  authorities: Role[];
+}
+
 type LoginData = {
   username: String;
   password: String;
 };
 
 type LoginResponse = {
-  access_token: String;
-  token_type: String;
+  access_token: string;
+  token_type: string;
   expires_in: number;
-  scope: String;
+  scope: string;
   userId: number;
-  username: String;
+  username: string;
 };
 
 const tokenKey = 'authData';
@@ -86,3 +95,14 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const getTokenData = () : TokenData | undefined => {
+
+  const loginResponse = getAuthData();
+  try {
+    return jwtDecode(loginResponse.access_token) as TokenData;
+  } 
+  catch (error) {
+    return undefined;
+  }
+}
