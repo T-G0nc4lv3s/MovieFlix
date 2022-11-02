@@ -4,6 +4,7 @@ import Home from 'pages/Home';
 import MovieList from 'pages/MovieList';
 import MovieReviews from 'pages/MovieReviews';
 import history from 'utils/history';
+import PrivateRoute from 'components/PrivateRoute';
 
 const Routes = () => {
   return (
@@ -13,12 +14,12 @@ const Routes = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/movies">
+        <PrivateRoute exact path="/movies">
           <MovieList />
-        </Route>
-        <Route exact path="/movies/:movieId">
+        </PrivateRoute>
+        <PrivateRoute exact path="/movies/:movieId">
           <MovieReviews />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </Router>
   );
