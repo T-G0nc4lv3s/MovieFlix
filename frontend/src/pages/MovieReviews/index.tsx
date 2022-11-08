@@ -1,23 +1,52 @@
 import './styles.css';
-import ReviewSubmit from 'components/ReviewSubmit';
+import { useState, useEffect } from 'react';
+import { requestBackend, hasAnyRoles } from 'utils/requests';
+import { AxiosRequestConfig } from 'axios';
+import { Review } from 'types/review';
+import { useParams } from 'react-router-dom';
 import ReviewListCard from 'components/ReviewListCard';
-import { hasAnyRoles } from 'utils/requests';
+import ReviewSubmit from 'components/ReviewSubmit';
+
+type UrlParams = {
+  movieId: string;
+};
 
 const MovieReviews = () => {
+  const { movieId } = useParams<UrlParams>();
+
+  const [reviews, setReviews] = useState<Review[]>([]);
+
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/movies/${movieId}/reviews`,
+      withCredentials: true,
+    };
+
+    requestBackend(params).then((response) => {
+      setReviews(response.data);
+    });
+  }, [movieId]);
+
+  const handleOnInsertReview = (review: Review) => {
+    const clone = [...reviews];
+    clone.push(review);
+    setReviews(clone);
+  };
+
   return (
-    <div className="movie-reviews-card">
-      <div className="card-header-container">
-        <h1>Tela detalhes do filme id: 1</h1>
-      </div>
+    <>
+      <h1>Tela detalhes do filme id: {movieId}</h1>
       {hasAnyRoles(['ROLE_MEMBER']) && (
         <div className="form-review-container">
-          <ReviewSubmit />
+          <ReviewSubmit
+            movieId={movieId}
+            onInsertReview={handleOnInsertReview}
+          />
         </div>
       )}
-      <div className="review-list-container">
-        <ReviewListCard />
-      </div>
-    </div>
+      {reviews && <ReviewListCard reviews={reviews} />}
+    </>
   );
 };
 
