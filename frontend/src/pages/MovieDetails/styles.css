@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.movie-reviews-card {
+.movie-details-card {
   display: flex;
   padding: 20px 10px;
   flex-direction: column;
@@ -33,7 +33,7 @@
 }
 
 @media(min-width: 576px){
-  .movie-reviews-card {
+  .movie-details-card {
     padding: 26px 18px;
   }
   .card-header-container h1 {
@@ -52,7 +52,7 @@
 }
 
 @media(min-width: 768px){
-  .movie-reviews-card {
+  .movie-details-card {
     padding: 32px 26px;
   }
   .card-header-container h1 {
@@ -71,7 +71,7 @@
 }
 
 @media(min-width: 992px){
-  .movie-reviews-card {
+  .movie-details-card {
     padding: 38px 34px;
   }
   .card-header-container h1 {

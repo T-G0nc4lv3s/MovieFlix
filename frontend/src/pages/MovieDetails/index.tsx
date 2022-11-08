@@ -35,8 +35,10 @@ const MovieDetails = () => {
   };
 
   return (
-    <>
-      <h1>Tela detalhes do filme id: {movieId}</h1>
+    <div className="movie-details-card">
+      <div className="card-header-container">
+        <h1>Tela detalhes do filme id: {movieId}</h1>
+      </div>
       {hasAnyRoles(['ROLE_MEMBER']) && (
         <div className="form-review-container">
           <ReviewSubmit
@@ -46,7 +48,7 @@ const MovieDetails = () => {
         </div>
       )}
       {reviews && <ReviewListCard reviews={reviews} />}
-    </>
+    </div>
   );
 };
 
