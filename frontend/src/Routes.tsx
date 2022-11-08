@@ -2,7 +2,7 @@ import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
 import MovieCatalog from 'pages/MovieCatalog';
-import MovieReviews from 'pages/MovieReviews';
+import MovieDetails from 'pages/MovieDetails';
 import history from 'utils/history';
 import PrivateRoute from 'components/PrivateRoute';
 import { isAuthenticated } from 'utils/requests';
@@ -19,7 +19,7 @@ const Routes = () => {
           <MovieCatalog />
         </PrivateRoute>
         <PrivateRoute exact path="/movies/:movieId">
-          <MovieReviews />
+          <MovieDetails />
         </PrivateRoute>
       </Switch>
     </Router>

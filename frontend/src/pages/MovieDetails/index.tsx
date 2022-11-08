@@ -11,7 +11,7 @@ type UrlParams = {
   movieId: string;
 };
 
-const MovieReviews = () => {
+const MovieDetails = () => {
   const { movieId } = useParams<UrlParams>();
 
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -50,4 +50,4 @@ const MovieReviews = () => {
   );
 };
 
-export default MovieReviews;
+export default MovieDetails;
