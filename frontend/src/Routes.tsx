@@ -1,7 +1,7 @@
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
-import MovieList from 'pages/MovieList';
+import MovieCatalog from 'pages/MovieCatalog';
 import MovieReviews from 'pages/MovieReviews';
 import history from 'utils/history';
 import PrivateRoute from 'components/PrivateRoute';
@@ -16,7 +16,7 @@ const Routes = () => {
           {isAuthenticated() ? <Redirect to="/movies" /> : <Home />}
         </Route>
         <PrivateRoute exact path="/movies">
-          <MovieList />
+          <MovieCatalog />
         </PrivateRoute>
         <PrivateRoute exact path="/movies/:movieId">
           <MovieReviews />
