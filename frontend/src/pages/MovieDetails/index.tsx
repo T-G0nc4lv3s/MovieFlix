@@ -6,13 +6,17 @@ import { Review } from 'types/review';
 import { useParams } from 'react-router-dom';
 import ReviewListCard from 'components/ReviewListCard';
 import ReviewSubmit from 'components/ReviewSubmit';
+import ReviewLoader from './ReviewLoader';
 
 type UrlParams = {
   movieId: string;
 };
 
 const MovieDetails = () => {
+
   const { movieId } = useParams<UrlParams>();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [reviews, setReviews] = useState<Review[]>([]);
 
@@ -23,9 +27,14 @@ const MovieDetails = () => {
       withCredentials: true,
     };
 
-    requestBackend(params).then((response) => {
+    setIsLoading(true);
+    requestBackend(params)
+    .then((response) => {
       setReviews(response.data);
-    });
+    })
+    .finally(() => {
+      setIsLoading(false);
+    })
   }, [movieId]);
 
   const handleOnInsertReview = (review: Review) => {
@@ -47,7 +56,7 @@ const MovieDetails = () => {
           />
         </div>
       )}
-      {reviews && <ReviewListCard reviews={reviews} />}
+      {isLoading ? <ReviewLoader /> :  <ReviewListCard reviews={reviews} />}
     </div>
   );
 };

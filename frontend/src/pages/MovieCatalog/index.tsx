@@ -37,10 +37,9 @@ const MovieList = () => {
     <div className="movie-list-container">
       <h1>Tela listagem de filmes</h1>
       {isLoading ? (
-        <>
-          <h1>Carregando</h1>
+        <div>
           <ThreeDotsLoader />
-        </>
+        </div>
       ) : (
         page?.content.map((movie) => (
           <div className="movie-link" key={movie.id}>
