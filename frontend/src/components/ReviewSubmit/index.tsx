@@ -14,7 +14,12 @@ type Props = {
 };
 
 const ReviewSubmit = ({ movieId, onInsertReview }: Props) => {
-  const { register, handleSubmit, setValue } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
     const params: AxiosRequestConfig = {
@@ -41,12 +46,17 @@ const ReviewSubmit = ({ movieId, onInsertReview }: Props) => {
         <div className="form-review-container">
           <div className="input-review-container">
             <input
-              {...register('text')}
+              {...register('text', {
+                required: 'Campo obrigatório',
+              })}
               type="text"
               id="ctrl-review"
               placeholder="Deixe sua avaliação aqui"
               name="text"
             />
+          </div>
+          <div className="invalid-feedback d-block">
+            {errors?.text?.message}
           </div>
           <div className="input-btn-container">
             <input
