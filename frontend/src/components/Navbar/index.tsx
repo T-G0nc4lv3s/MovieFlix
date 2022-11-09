@@ -1,7 +1,8 @@
 import './styles.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
-import { isAuthenticated, getTokenData, removeAuthData } from 'utils/requests';
+import { isAuthenticated, getTokenData } from 'utils/auth';
+import { removeAuthData } from 'utils/storage';
 import { AuthContext } from '../../AuthContext';
 import history from 'utils/history';
 

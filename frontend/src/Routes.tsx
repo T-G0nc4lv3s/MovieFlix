@@ -5,7 +5,7 @@ import MovieCatalog from 'pages/MovieCatalog';
 import MovieDetails from 'pages/MovieDetails';
 import history from 'utils/history';
 import PrivateRoute from 'components/PrivateRoute';
-import { isAuthenticated } from 'utils/requests';
+import { isAuthenticated } from 'utils/auth';
 
 const Routes = () => {
   return (

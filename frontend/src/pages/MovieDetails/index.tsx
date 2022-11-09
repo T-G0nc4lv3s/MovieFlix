@@ -1,6 +1,7 @@
 import './styles.css';
 import { useState, useEffect } from 'react';
-import { requestBackend, hasAnyRoles } from 'utils/requests';
+import { requestBackend } from 'utils/requests';
+import { hasAnyRoles } from 'utils/auth';
 import { AxiosRequestConfig } from 'axios';
 import { Review } from 'types/review';
 import { useParams } from 'react-router-dom';
