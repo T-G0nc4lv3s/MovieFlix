@@ -5,7 +5,7 @@ export type Movie = {
     title: String;
     subTitle: String;
     year: number;
-    imgUrl: String;
+    imgUrl: string;
     synopsis: String;
     genre: Genre;
 }
