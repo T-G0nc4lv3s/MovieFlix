@@ -36,19 +36,21 @@ const MovieList = () => {
   return (
     <div className="movie-list-container">
       <h1>Tela listagem de filmes</h1>
-      {isLoading ? (
-        <div>
-          <ThreeDotsLoader />
-        </div>
-      ) : (
-        page?.content.map((movie) => (
-          <div className="movie-link" key={movie.id}>
-            <Link to={`movies/${movie.id}`}>
-              <MovieCard movie={movie} />
-            </Link>
+      <div className="row">
+        {isLoading ? (
+          <div>
+            <ThreeDotsLoader />
           </div>
-        ))
-      )}
+        ) : (
+          page?.content.map((movie) => (
+            <div className="movie-link col-sm-6 col-xl-3" key={movie.id}>
+              <Link to={`movies/${movie.id}`}>
+                <MovieCard movie={movie} />
+              </Link>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
