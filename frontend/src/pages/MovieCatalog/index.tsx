@@ -7,6 +7,7 @@ import { requestBackend } from './../../utils/requests';
 import MovieCard from 'components/MovieCard';
 import { Link } from 'react-router-dom';
 import ThreeDotsLoader from 'pages/MovieCatalog/ThreeDotsLoader';
+import Pagination from 'components/Pagination';
 
 const MovieList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -50,6 +51,9 @@ const MovieList = () => {
             </div>
           ))
         )}
+      </div>
+      <div>
+        <Pagination />
       </div>
     </div>
   );
