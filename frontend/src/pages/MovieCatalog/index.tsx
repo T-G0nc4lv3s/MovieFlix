@@ -52,7 +52,7 @@ const MovieList = () => {
           ))
         )}
       </div>
-      <div>
+      <div className="catalog-pagination-container">
         <Pagination />
       </div>
     </div>

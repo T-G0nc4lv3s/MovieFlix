@@ -7,7 +7,7 @@
 .movie-list-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 10px 20px;
 }
 
@@ -40,6 +40,11 @@
   .movie-link {
     font-size: 20px;
   }
+}
+
+.catalog-pagination-container{
+  margin-top: 26px;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 768px) {
