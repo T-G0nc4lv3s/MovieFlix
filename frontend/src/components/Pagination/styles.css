@@ -21,6 +21,11 @@
   margin-left: 10px;
 }
 
+.pagination-arrow-container {
+  display: flex;
+  align-items: center;
+}
+
 .pagination-item.active {
   background-color: #ffc700;
 }

@@ -14,16 +14,21 @@ const MovieList = () => {
 
   const [page, setPage] = useState<SpringPage<Movie>>();
 
-  const params: AxiosRequestConfig = {
-    method: 'GET',
-    url: '/movies',
-    withCredentials: true,
-    params: {
-      genreId: 0,
-    },
-  };
-
   useEffect(() => {
+    getMovies(0);
+  }, []);
+
+  const getMovies = (pageNumber: number) => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: '/movies',
+      withCredentials: true,
+      params: {
+        page: pageNumber,
+        size: 4,
+      },
+    };
+
     setIsLoading(true);
     requestBackend(params)
       .then((response) => {
@@ -32,7 +37,7 @@ const MovieList = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  };
 
   return (
     <div className="movie-list-container">
@@ -53,7 +58,11 @@ const MovieList = () => {
         )}
       </div>
       <div className="catalog-pagination-container">
-        <Pagination />
+        <Pagination
+          pageCount={page ? page.totalPages : 0}
+          range={3}
+          onChange={getMovies}
+        />
       </div>
     </div>
   );
