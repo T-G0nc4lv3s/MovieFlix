@@ -42,7 +42,7 @@ const MovieList = () => {
   return (
     <div className="movie-list-container">
       <h1>Tela listagem de filmes</h1>
-      <div className="row">
+      <div className="row grid-container">
         {isLoading ? (
           <div>
             <ThreeDotsLoader />

@@ -7,8 +7,8 @@
   border-radius: 4px;
 }
 
-.movie-card-container:hover{
-    border: solid #FFC700 4px;
+.movie-card-container:hover {
+  border: solid #ffc700 4px;
 }
 
 .movie-card-image-container img {
@@ -44,7 +44,20 @@
 }
 
 @media(min-width: 576px){
-    .movie-card-container{
-        min-height: 283px;
-    }
+  .movie-card-container{
+    margin-bottom: 20px;
+  }
+}
+
+@media(min-width: 768px){
+  .movie-card-container{
+    margin-bottom: 40px;
+    margin-right: 20px;
+  }
+}
+
+@media(min-width: 1200px){
+  .movie-card-container{
+    min-width: 262px;
+  }
 }
