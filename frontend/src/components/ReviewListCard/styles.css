@@ -4,7 +4,7 @@
   background: #6c6c6c;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  padding: 20px 10px;
+  padding: 20px 20px;
 }
 
 .username-container {
@@ -46,18 +46,18 @@
 
 @media(min-width: 576px){
   .list-card-container {
-    padding: 23px 13px;
+    padding: 23px 20px;
   }
 }
 
 @media(min-width: 768px){
   .list-card-container {
-    padding: 26px 16px;
+    padding: 26px 40px;
   }
 }
 
 @media(min-width: 992px){
   .list-card-container {
-    padding: 30px 20px;
+    padding: 30px 40px;
   }
 }
