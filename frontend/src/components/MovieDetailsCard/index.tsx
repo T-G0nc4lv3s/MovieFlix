@@ -12,13 +12,15 @@ const MovieDetailsCard = ({ movie }: Props) => {
       <div className="movie-details-image-container">
         <img src={movie.imgUrl} alt="imagem" />
       </div>
-      <div className="movie-details-middle-container">
-        <span className="movie-details-title">{movie.title}</span>
-        <span className="movie-details-year">{movie.year}</span>
-        <span className="movie-details-subtitle">{movie.subTitle}</span>
-      </div>
-      <div className="movie-details-bottom-container">
-        <p>{movie.synopsis}</p>
+      <div>
+        <div className="movie-details-middle-container">
+          <span className="movie-details-title">{movie.title}</span>
+          <span className="movie-details-year">{movie.year}</span>
+          <span className="movie-details-subtitle">{movie.subTitle}</span>
+        </div>
+        <div className="movie-details-bottom-container">
+          <p>{movie.synopsis}</p>
+        </div>
       </div>
     </div>
   );

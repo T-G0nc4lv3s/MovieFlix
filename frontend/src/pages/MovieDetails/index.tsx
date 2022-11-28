@@ -71,7 +71,7 @@ const MovieDetails = () => {
 
   return (
     <div className="movie-details-card">
-      <div className="card-header-container">
+      <div className="movie-details-top-container">
         {movie && <MovieDetailsCard movie={movie} />}
       </div>
       {hasAnyRoles(['ROLE_MEMBER']) && (
