@@ -8,14 +8,17 @@ import { useParams } from 'react-router-dom';
 import ReviewListCard from 'components/ReviewListCard';
 import ReviewSubmit from 'components/ReviewSubmit';
 import ReviewLoader from './ReviewLoader';
+import { Movie } from 'types/movie';
+import MovieDetailsCard from 'components/MovieDetailsCard';
 
 type UrlParams = {
   movieId: string;
 };
 
 const MovieDetails = () => {
-
   const { movieId } = useParams<UrlParams>();
+
+  const [movie, setMovie] = useState<Movie>();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,13 +33,35 @@ const MovieDetails = () => {
 
     setIsLoading(true);
     requestBackend(params)
-    .then((response) => {
-      setReviews(response.data);
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
+      .then((response) => {
+        setReviews(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [movieId]);
+
+  useEffect(() => {
+    getMovie(movieId);
+  }, [movieId]);
+
+  const getMovie = (movieId: string) => {
+    const params: AxiosRequestConfig = {
+      method: 'GET',
+      url: `/movies/${movieId}`,
+      withCredentials: true,
+    };
+
+    setIsLoading(true);
+    requestBackend(params)
+      .then((response) => {
+        console.log(response.data);
+        setMovie(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const handleOnInsertReview = (review: Review) => {
     const clone = [...reviews];
@@ -47,7 +72,7 @@ const MovieDetails = () => {
   return (
     <div className="movie-details-card">
       <div className="card-header-container">
-        <h1>Tela detalhes do filme id: {movieId}</h1>
+        {movie && <MovieDetailsCard movie={movie} />}
       </div>
       {hasAnyRoles(['ROLE_MEMBER']) && (
         <div className="form-review-container">
@@ -57,7 +82,7 @@ const MovieDetails = () => {
           />
         </div>
       )}
-      {isLoading ? <ReviewLoader /> :  <ReviewListCard reviews={reviews} />}
+      {isLoading ? <ReviewLoader /> : <ReviewListCard reviews={reviews} />}
     </div>
   );
 };
