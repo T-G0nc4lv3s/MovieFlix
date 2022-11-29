@@ -1,6 +1,6 @@
 import './styles.css';
 import { AxiosRequestConfig } from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Movie } from 'types/movie';
 import { SpringPage } from 'types/vendor/spring';
 import { requestBackend } from './../../utils/requests';
@@ -10,22 +10,27 @@ import ThreeDotsLoader from 'pages/MovieCatalog/ThreeDotsLoader';
 import Pagination from 'components/Pagination';
 import MovieFilter from 'components/MovieFilter';
 
-const MovieList = () => {
+type ControlComponentsData = {
+  activePage: number;
+};
+
+const MovieCatalog = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [page, setPage] = useState<SpringPage<Movie>>();
 
-  useEffect(() => {
-    getMovies(0);
-  }, []);
+  const [controlComponentsData, setControlComponentsData] =
+    useState<ControlComponentsData>({
+      activePage: 0,
+    });
 
-  const getMovies = (pageNumber: number) => {
+  const getMovies = useCallback(() => {
     const params: AxiosRequestConfig = {
       method: 'GET',
       url: '/movies',
       withCredentials: true,
       params: {
-        page: pageNumber,
+        page: controlComponentsData.activePage,
         size: 4,
       },
     };
@@ -38,7 +43,15 @@ const MovieList = () => {
       .finally(() => {
         setIsLoading(false);
       });
+  }, [controlComponentsData]);
+
+  const handlePageChange = (pageNumber: number) => {
+    setControlComponentsData({ activePage: pageNumber });
   };
+
+  useEffect(() => {
+    getMovies();
+  }, [getMovies]);
 
   return (
     <div className="movie-list-container">
@@ -62,11 +75,11 @@ const MovieList = () => {
         <Pagination
           pageCount={page ? page.totalPages : 0}
           range={3}
-          onChange={getMovies}
+          onChange={handlePageChange}
         />
       </div>
     </div>
   );
 };
 
-export default MovieList;
+export default MovieCatalog;
