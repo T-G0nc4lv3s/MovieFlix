@@ -8,6 +8,7 @@ import MovieCard from 'components/MovieCard';
 import { Link } from 'react-router-dom';
 import ThreeDotsLoader from 'pages/MovieCatalog/ThreeDotsLoader';
 import Pagination from 'components/Pagination';
+import MovieFilter from 'components/MovieFilter';
 
 const MovieList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +42,7 @@ const MovieList = () => {
 
   return (
     <div className="movie-list-container">
-      <h1>Tela listagem de filmes</h1>
+      <MovieFilter />
       <div className="row grid-container">
         {isLoading ? (
           <div>
