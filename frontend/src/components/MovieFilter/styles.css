@@ -16,10 +16,14 @@
   border-radius: 4px;
 }
 
-.movie-catalog-select__indicator-separator{
-    display: none;
+.movie-catalog-select__indicator-separator {
+  display: none;
 }
 
-.movie-catalog-select__placeholder{
-    color: #e1e1e1 !important;
+.movie-catalog-select__placeholder {
+  color: #e1e1e1 !important;
+}
+
+.movie-catalog-select__single-value {
+  color: #e1e1e1 !important;
 }

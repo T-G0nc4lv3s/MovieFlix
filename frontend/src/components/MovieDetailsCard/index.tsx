@@ -1,6 +1,5 @@
 import './styles.css';
 import { Movie } from 'types/movie';
-import ImgMovie from 'assets/images/img-catalog.png';
 
 type Props = {
   movie: Movie;
