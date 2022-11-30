@@ -11,6 +11,7 @@
 
 .movie-catalog-select__control {
   width: 224px;
+  height: 50px;
   background: #6c6c6c !important;
   border: 1px solid #e1e1e1;
   border-radius: 4px;
@@ -22,8 +23,18 @@
 
 .movie-catalog-select__placeholder {
   color: #e1e1e1 !important;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .movie-catalog-select__single-value {
   color: #e1e1e1 !important;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+@media(min-width: 1200px){
+  .movie-filter-container{
+    height: 80px;
+  }
 }
