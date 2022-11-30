@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { requestBackend } from 'utils/requests';
 import { AxiosRequestConfig } from 'axios';
 import { Review } from 'types/review';
+import { toast } from 'react-toastify';
 
 type FormData = {
   text: string;
@@ -33,10 +34,13 @@ const ReviewSubmit = ({ movieId, onInsertReview }: Props) => {
     };
 
     requestBackend(params).then((response) => {
+      toast.info('Avaliação enviada com sucesso');
       onInsertReview(response.data);
+    })
+    .catch(() => {
+      toast.error('Erro ao enviar avaliação');
     });
     setValue('text', '');
-
     console.log(formData);
   };
 

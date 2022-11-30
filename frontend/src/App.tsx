@@ -1,8 +1,11 @@
+import 'react-toastify/dist/ReactToastify.css';
 import './assets/styles/custom.scss';
 import './App.css';
 import Routes from './Routes';
 import { AuthContextData, AuthContext } from './AuthContext';
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+
 
 function App() {
   const [authContextData, setAuthContextData] = useState<AuthContextData>({
@@ -10,8 +13,9 @@ function App() {
   });
 
   return (
-    <AuthContext.Provider value={{authContextData, setAuthContextData}}>
+    <AuthContext.Provider value={{ authContextData, setAuthContextData }}>
       <Routes />
+      <ToastContainer />
     </AuthContext.Provider>
   );
 }
