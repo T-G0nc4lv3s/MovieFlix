@@ -8,10 +8,11 @@ import MovieCard from 'components/MovieCard';
 import { Link } from 'react-router-dom';
 import ThreeDotsLoader from 'pages/MovieCatalog/ThreeDotsLoader';
 import Pagination from 'components/Pagination';
-import MovieFilter from 'components/MovieFilter';
+import MovieFilter, { MovieFilterData } from 'components/MovieFilter';
 
 type ControlComponentsData = {
   activePage: number;
+  filterData: MovieFilterData;
 };
 
 const MovieCatalog = () => {
@@ -22,6 +23,12 @@ const MovieCatalog = () => {
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
       activePage: 0,
+      filterData: {
+        genre: {
+          id: 0,
+          name: '',
+        },
+      },
     });
 
   const getMovies = useCallback(() => {
@@ -30,6 +37,7 @@ const MovieCatalog = () => {
       url: '/movies',
       withCredentials: true,
       params: {
+        genreId: controlComponentsData.filterData.genre?.id,
         page: controlComponentsData.activePage,
         size: 4,
       },
@@ -46,7 +54,14 @@ const MovieCatalog = () => {
   }, [controlComponentsData]);
 
   const handlePageChange = (pageNumber: number) => {
-    setControlComponentsData({ activePage: pageNumber });
+    setControlComponentsData({
+      activePage: pageNumber,
+      filterData: controlComponentsData.filterData,
+    });
+  };
+
+  const handleChangeFilter = (data: MovieFilterData) => {
+    setControlComponentsData({ activePage: 0, filterData: data });
   };
 
   useEffect(() => {
@@ -55,7 +70,7 @@ const MovieCatalog = () => {
 
   return (
     <div className="movie-list-container">
-      <MovieFilter />
+      <MovieFilter onChangeFilter={handleChangeFilter} />
       <div className="row grid-container">
         {isLoading ? (
           <div>
@@ -73,6 +88,7 @@ const MovieCatalog = () => {
       </div>
       <div className="catalog-pagination-container">
         <Pagination
+          forcePage={page?.number}
           pageCount={page ? page.totalPages : 0}
           range={3}
           onChange={handlePageChange}

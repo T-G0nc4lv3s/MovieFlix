@@ -6,11 +6,14 @@ import { requestBackend } from 'utils/requests';
 import { AxiosRequestConfig } from 'axios';
 import { useForm, Controller } from 'react-hook-form';
 
-type MovieFilterData = {
+export type MovieFilterData = {
   genre: Genre;
 };
+type Props = {
+  onChangeFilter: (data: MovieFilterData) => void;
+};
 
-const MovieFilter = () => {
+const MovieFilter = ({ onChangeFilter }: Props) => {
   const [selectGenres, setSelectGenres] = useState<Genre[]>([]);
 
   const { setValue, getValues, control } = useForm<MovieFilterData>();
@@ -36,7 +39,7 @@ const MovieFilter = () => {
     const obj: MovieFilterData = {
       genre: getValues('genre'),
     };
-
+    onChangeFilter(obj);
     console.log('Enviou ', obj);
   };
 
